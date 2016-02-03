@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MTG Card Search</string>
     <string name="search_hint">Card Name</string>
+    <string name="okay">OK</string>
+    <string name="info_body">"The information presented through this app about Magic: The Gathering is copyrighted by Wizards of the Coast.\n\nThis app is not produced, endorsed, supported, or affiliated with Wizards of the Coast."</string>
 </resources>

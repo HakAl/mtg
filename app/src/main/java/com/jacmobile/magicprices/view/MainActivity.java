@@ -37,7 +37,6 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -55,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements URLLoader
     @Bind(R.id.empty_view_main) TextView emptyView;
     @Bind(android.support.v7.appcompat.R.id.search_src_text) SearchAutoComplete searchSuggestionsView;
 
-    private ArrayAdapter<String> searchSuggestionAdapter;
-
     private MTGWebClient webClient;
+    private MTGCardAdapter mtgCardAdapter;
+    private ArrayAdapter<String> suggestionsAdapter;
 
     @Override protected void onCreate(Bundle savedInstanceState)
     {
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements URLLoader
         super.onResume();
         if (webClient == null) this.webClient = new MTGWebClient();
         initializeSearchView();
+        initializeSuggestionsView();
     }
 
     @Override public void onBackPressed()
@@ -107,12 +107,9 @@ public class MainActivity extends AppCompatActivity implements URLLoader
     {
         switch (item.getItemId()) {
             case R.id.info:
-
                 new AlertDialog.Builder(MainActivity.this)
-                        .setMessage(
-                                "The information presented through this app about Magic: The Gathering is copyrighted by Wizards of the Coast.\n\n" +
-                                "This app is not produced, endorsed, supported, or affiliated with Wizards of the Coast.")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                        .setMessage(getString(R.string.info_body))
+                        .setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener()
                         {
                             @Override public void onClick(DialogInterface dialog, int which)
                             {
@@ -121,12 +118,19 @@ public class MainActivity extends AppCompatActivity implements URLLoader
                         })
                         .create()
                         .show();
-
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Callback from edition selection modal.
+     */
+    @Override public void loadURL(@NonNull String url)
+    {
+        searchCards.clearFocus();
+        showWeb(url);
     }
 
     private void initializeSearchView()
@@ -136,53 +140,51 @@ public class MainActivity extends AppCompatActivity implements URLLoader
         {
             @Override public boolean onQueryTextSubmit(String query)
             {
-                if (!TextUtils.isEmpty(query)) {
-                    searchDeckBrew(query);
-                }
+                if (!TextUtils.isEmpty(query)) searchDeckBrew(query);
                 return false;
             }
 
             @Override public boolean onQueryTextChange(String newText)
             {
-                if (!TextUtils.isEmpty(newText)) {
-                    final Call<DeckBrewService.PredictSearch> predictCall = deckBrewService.predictSearch(newText);
-                    predictCall.enqueue(new Callback<DeckBrewService.PredictSearch>()
-                    {
-                        @Override
-                        public void onResponse(final Response<DeckBrewService.PredictSearch> response)
+                deckBrewService
+                        .predictSearch(newText)
+                        .enqueue(new Callback<DeckBrewService.PredictSearch>()
                         {
-                            if (response.body().results.length > 0) {
-                                if (searchSuggestionAdapter == null) {
-                                    searchSuggestionAdapter = new ArrayAdapter<>(MainActivity.this,
-                                            android.R.layout.simple_dropdown_item_1line, Arrays.asList(response.body().results));
-                                } else {
-                                    searchSuggestionAdapter.clear();
-                                    searchSuggestionAdapter.addAll(Arrays.asList(response.body().results));
-                                    searchSuggestionAdapter.notifyDataSetChanged();
-                                }
-
-                                searchSuggestionsView.setAdapter(searchSuggestionAdapter);
-                                searchSuggestionsView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                                {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                            @Override
+                            public void onResponse(final Response<DeckBrewService.PredictSearch> response)
+                            {
+                                if (response.body().results.size() > 0) {
+                                    final ArrayList<String> results = response.body().results;
+                                    suggestionsAdapter.clear();
+                                    suggestionsAdapter.addAll(results);
+                                    suggestionsAdapter.notifyDataSetChanged();
+                                    searchSuggestionsView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                                     {
-                                        searchDeckBrew(response.body().results[position]);
-                                    }
-                                });
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                        {
+                                            searchDeckBrew(results.get(position));
+                                        }
+                                    });
+                                    searchSuggestionsView.showDropDown();
+                                }
                             }
-                        }
 
-                        @Override public void onFailure(Throwable t)
-                        {
-                        }
-                    });
-                }
+                            @Override public void onFailure(Throwable t) {}
+                        });
 
-
-                return false;
+                return true;
             }
         });
+    }
+
+    private void initializeSuggestionsView()
+    {
+        this.suggestionsAdapter = new ArrayAdapter<>(
+                MainActivity.this,
+                android.R.layout.simple_dropdown_item_1line,
+                new ArrayList<>(Arrays.asList(new String[0])));
+        searchSuggestionsView.setAdapter(suggestionsAdapter);
         searchSuggestionsView.setThreshold(1);
     }
 
@@ -191,33 +193,45 @@ public class MainActivity extends AppCompatActivity implements URLLoader
         DeviceUtils.hideKeyboard(MainActivity.this);
         showLoading();
 
-        final Call<List<MTGCard>> searchCall = deckBrewService.searchCards(query.toLowerCase());
-        searchCall.enqueue(new Callback<List<MTGCard>>()
-        {
-            @Override
-            public void onResponse(Response<List<MTGCard>> response)
-            {
-                if (response.body().size() > 0) {
-                    listMain.setAdapter(null);
-                    listMain.setAdapter(new MTGCardAdapter(response.body()));
-                    listMain.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        deckBrewService
+                .searchCards(query.toLowerCase())
+                .enqueue(new Callback<List<MTGCard>>()
+                {
+                    @Override
+                    public void onResponse(Response<List<MTGCard>> response)
                     {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                        {
-                            handleCardSelection(position);
+                        if (response.body().size() > 0) {
+                            updateCardAdapter(response.body());
+                            listMain.setAdapter(mtgCardAdapter);
+                            listMain.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                            {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                {
+                                    handleCardSelection(position);
+                                }
+                            });
+                            showList();
+                        } else {
+                            showEmpty();
                         }
-                    });
-                    showList();
-                } else {
-                    showEmpty();
-                }
-            }
+                    }
 
-            @Override public void onFailure(Throwable t)
-            {
-            }
-        });
+                    @Override public void onFailure(Throwable t)
+                    {
+                    }
+                });
+    }
+
+    private void updateCardAdapter(List<MTGCard> cardList)
+    {
+        if (mtgCardAdapter == null) {
+            this.mtgCardAdapter = new MTGCardAdapter(getApplicationContext(), R.layout.card_search_result, cardList);
+        } else {
+            mtgCardAdapter.clear();
+            mtgCardAdapter.addAll(cardList);
+            mtgCardAdapter.notifyDataSetChanged();
+        }
     }
 
     private void handleCardSelection(int position)
@@ -235,6 +249,15 @@ public class MainActivity extends AppCompatActivity implements URLLoader
             EditionListDialog
                     .newInstance(selectedItem.name, storeUrls, editionNames)
                     .setUrlLoaderAndShow(getFragmentManager(), this);
+        }
+    }
+
+    private void showView(MultiStateView.ViewState ordinal)
+    {
+        if (multiStateView != null) {
+            multiStateView.setViewState(ordinal);
+        } else {
+            Log.d(TAG, "NullPointerException attempting to show view. -->multiStateView");
         }
     }
 
@@ -269,21 +292,9 @@ public class MainActivity extends AppCompatActivity implements URLLoader
         showView(MultiStateView.ViewState.LOADING);
     }
 
-    private void showView(MultiStateView.ViewState ordinal)
-    {
-        if (multiStateView != null) {
-            multiStateView.setViewState(ordinal);
-        } else {
-            Log.d(TAG, "NullPointerException attempting to show view. -->multiStateView");
-        }
-    }
-
-    @Override public void loadURL(String url)
-    {
-        searchCards.clearFocus();
-        showWeb(url);
-    }
-
+    /**
+     * Custom client to show WebView when page finishes loading
+     */
     class MTGWebClient extends WebViewClient
     {
         @Override
@@ -292,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements URLLoader
             handler.proceed();
         }
 
-        //prevent loading any URLs that aren't intended
+        //could prevent loading any URLs that aren't intended
         @Override public boolean shouldOverrideUrlLoading(WebView view, String urlToLoad)
         {
             view.loadUrl(urlToLoad);

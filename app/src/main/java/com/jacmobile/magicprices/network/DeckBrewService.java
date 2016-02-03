@@ -1,6 +1,7 @@
 package com.jacmobile.magicprices.network;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -118,14 +119,14 @@ public interface DeckBrewService
 
     class PredictSearch
     {
-        public final String[] results;
+        public final ArrayList<String> results;
 
         public PredictSearch()
         {
-            this.results = new String[0];
+            this.results = new ArrayList<>();
         }
 
-        public PredictSearch(String[] results)
+        public PredictSearch(ArrayList<String> results)
         {
             this.results = results;
         }

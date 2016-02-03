@@ -20,6 +20,8 @@ public class MainActivity$$ViewBinder<T extends com.jacmobile.magicprices.view.M
     target.searchCards = finder.castView(view, 2131492974, "field 'searchCards'");
     view = finder.findRequiredView(source, 2131492988, "field 'emptyView'");
     target.emptyView = finder.castView(view, 2131492988, "field 'emptyView'");
+    view = finder.findRequiredView(source, 2131492967, "field 'searchSuggestionsView'");
+    target.searchSuggestionsView = finder.castView(view, 2131492967, "field 'searchSuggestionsView'");
   }
 
   @Override public void unbind(T target) {
@@ -29,5 +31,6 @@ public class MainActivity$$ViewBinder<T extends com.jacmobile.magicprices.view.M
     target.progressBar = null;
     target.searchCards = null;
     target.emptyView = null;
+    target.searchSuggestionsView = null;
   }
 }

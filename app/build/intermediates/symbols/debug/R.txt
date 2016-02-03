@@ -809,7 +809,9 @@ int string abc_toolbar_collapse_description 0x7f060012
 int string app_name 0x7f060014
 int string appbar_scrolling_view_behavior 0x7f060015
 int string character_counter_pattern 0x7f060016
-int string search_hint 0x7f060017
+int string info_body 0x7f060017
+int string okay 0x7f060018
+int string search_hint 0x7f060019
 int string status_bar_notification_info_overflow 0x7f060013
 int style AlertDialog_AppCompat 0x7f09007e
 int style AlertDialog_AppCompat_Light 0x7f09007f

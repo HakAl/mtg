@@ -7,6 +7,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PredictSearchDeserializer implements JsonDeserializer
 {
@@ -21,7 +23,7 @@ public class PredictSearchDeserializer implements JsonDeserializer
                 predictions[i] =
                         JsonParseUtil.safeParseString(jsonArray.get(i).getAsJsonObject(), "name");
             }
-            return new DeckBrewService.PredictSearch(predictions);
+            return new DeckBrewService.PredictSearch(new ArrayList<>(Arrays.asList(predictions)));
         } else {
             return new DeckBrewService.PredictSearch();
         }

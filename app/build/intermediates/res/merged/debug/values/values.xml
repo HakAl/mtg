@@ -283,6 +283,8 @@
     <string name="app_name">MTG Card Search</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
+    <string name="info_body">"The information presented through this app about Magic: The Gathering is copyrighted by Wizards of the Coast.\n\nThis app is not produced, endorsed, supported, or affiliated with Wizards of the Coast."</string>
+    <string name="okay">OK</string>
     <string name="search_hint">Card Name</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>

@@ -1,24 +1,28 @@
 package com.jacmobile.magicprices.view;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jacmobile.magicprices.R;
 import com.jacmobile.magicprices.network.DeckBrewService;
+import com.jacmobile.magicprices.network.DeckBrewService.MTGCard;
 
 import java.util.List;
 
-public class MTGCardAdapter extends BaseAdapter
+public class MTGCardAdapter extends ArrayAdapter<MTGCard>
 {
     private final List<DeckBrewService.MTGCard> cardList;
 
-    public MTGCardAdapter(List<DeckBrewService.MTGCard> cardList)
+    public MTGCardAdapter(Context context, int resource, List<MTGCard> cardList)
     {
+        super(context, resource, cardList);
+
         this.cardList = cardList;
     }
 

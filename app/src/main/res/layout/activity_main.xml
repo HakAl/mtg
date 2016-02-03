@@ -31,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:inputType="text"
-                android:focusable="false"
                 app:defaultQueryHint="@string/search_hint"
                 app:iconifiedByDefault="false"/>
 
