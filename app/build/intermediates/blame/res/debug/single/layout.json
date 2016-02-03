@@ -96,12 +96,12 @@
         "source": "/Users/acorll/Documents/git/MagicPrices/app/src/main/res/layout/loading.xml"
     },
     {
-        "merged": "/Users/acorll/Documents/git/MagicPrices/app/build/intermediates/res/merged/debug/layout/list_dialog.xml",
-        "source": "/Users/acorll/Documents/git/MagicPrices/app/src/main/res/layout/list_dialog.xml"
-    },
-    {
         "merged": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",
         "source": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/acorll/Documents/git/MagicPrices/app/build/intermediates/res/merged/debug/layout/list_dialog.xml",
+        "source": "/Users/acorll/Documents/git/MagicPrices/app/src/main/res/layout/list_dialog.xml"
     },
     {
         "merged": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/res/merged/debug/layout/edition_list_item.xml",
@@ -116,12 +116,12 @@
         "source": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_action_bar_view_list_nav_layout.xml"
     },
     {
-        "merged": "/Users/acorll/Documents/git/MagicPrices/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/Users/acorll/Documents/git/MagicPrices/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
-    },
-    {
         "merged": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/res/merged/debug/layout/list_dialog.xml",
         "source": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/src/main/res/layout/list_dialog.xml"
+    },
+    {
+        "merged": "/Users/acorll/Documents/git/MagicPrices/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/acorll/Documents/git/MagicPrices/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
