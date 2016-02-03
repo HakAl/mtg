@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MTG Card Search</string>
+    <string name="search_hint">Card Name</string>
+</resources>

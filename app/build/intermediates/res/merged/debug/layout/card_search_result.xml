@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txt_card_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/img_card_list"
+        android:textSize="22sp"
+        android:textColor="#2a2a2a"
+        />
+
+    <TextView
+        android:id="@+id/txt_card_types"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/txt_card_name"
+        android:layout_toLeftOf="@+id/img_card_list"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/txt_static_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/txt_card_types"
+        android:layout_alignParentBottom="true"
+        android:text="View on TCG    >>"
+        android:textSize="16sp"
+        android:textColor="#0000ff"
+        />
+
+    <ImageView
+        android:id="@+id/img_card_list"
+        android:layout_width="103dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

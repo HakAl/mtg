@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CardViewStyle"  parent="CardView">
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardElevation">3dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="EditionListStyle">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:divider">@null</item>
+    </style>
+
+    <style name="DialogTitle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">#111</item>
+    </style>
+
+    <style name="DialogBody">
+        <item name="android:typeface">sans</item>
+        <item name="android:textColor">#111</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:maxLines">8</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:textColorLink">@color/colorPrimary</item>
+    </style>
+
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_card_search"
+        style="@style/CardViewStyle"
+        android:layout_width="@dimen/mtg_match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        >
+
+        <FrameLayout
+            android:layout_width="@dimen/mtg_match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/primary_border_rect"
+            android:padding="8dp"
+            >
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/search_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:inputType="text"
+                android:focusable="false"
+                app:defaultQueryHint="@string/search_hint"
+                app:iconifiedByDefault="false"/>
+
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
+
+    <com.jacmobile.magicprices.view.MultiStateView
+        android:id="@+id/msv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/card_card_search"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:emptyView="@layout/empty"
+        app:loadingView="@layout/loading"
+        app:viewState="content"
+        app:webView="@layout/webview">
+
+        <ListView
+            android:id="@+id/list_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@color/colorPrimaryDark"
+            android:dividerHeight="1dp"
+            android:scrollbarStyle="outsideOverlay"/>
+
+    </com.jacmobile.magicprices.view.MultiStateView>
+
+</RelativeLayout>
