@@ -48,12 +48,12 @@
         "source": "/Users/alex/Documents/git/mtg/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_time.xml"
     },
     {
-        "merged": "/Users/alex/Documents/git/mtg/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
-        "source": "/Users/alex/Documents/git/mtg/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_screen_content_include.xml"
-    },
-    {
         "merged": "/Users/alex/Documents/git/mtg/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
         "source": "/Users/alex/Documents/git/mtg/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/Users/alex/Documents/git/mtg/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
+        "source": "/Users/alex/Documents/git/mtg/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_screen_content_include.xml"
     },
     {
         "merged": "/Users/acorll/Documents/git/MagicPrices/app/build/intermediates/res/merged/debug/layout/design_layout_tab_icon.xml",
