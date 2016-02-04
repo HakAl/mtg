@@ -4,6 +4,10 @@
         "source": "/Users/acorll/Documents/git/MagicPrices/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     },
     {
+        "merged": "/Users/alex/Documents/git/mtg/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
+        "source": "/Users/alex/Documents/git/mtg/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
         "merged": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
         "source": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     }

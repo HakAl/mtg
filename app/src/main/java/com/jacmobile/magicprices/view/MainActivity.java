@@ -146,33 +146,47 @@ public class MainActivity extends AppCompatActivity implements URLLoader
 
             @Override public boolean onQueryTextChange(String newText)
             {
-                deckBrewService
-                        .predictSearch(newText)
-                        .enqueue(new Callback<DeckBrewService.PredictSearch>()
-                        {
-                            @Override
-                            public void onResponse(final Response<DeckBrewService.PredictSearch> response)
+                Log.wtf("onQueryTextChange", "newText: " + newText);
+                if (!TextUtils.isEmpty(newText)) {
+                    deckBrewService
+                            .predictSearch(newText)
+                            .enqueue(new Callback<DeckBrewService.PredictSearch>()
                             {
-                                if (response.body().results.size() > 0) {
-                                    final ArrayList<String> results = response.body().results;
-                                    suggestionsAdapter.clear();
-                                    suggestionsAdapter.addAll(results);
-                                    suggestionsAdapter.notifyDataSetChanged();
-                                    searchSuggestionsView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                                    {
-                                        @Override
-                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                @Override
+                                public void onResponse(final Response<DeckBrewService.PredictSearch> response)
+                                {
+                                    if (response.body().results.size() > 0) {
+                                        suggestionsAdapter.clear();
+                                        suggestionsAdapter.addAll(response.body().results);
+                                        suggestionsAdapter.notifyDataSetChanged();
+//                                        searchSuggestionsView.setAdapter(null);
+//                                        searchSuggestionsView.setAdapter(suggestionsAdapter);
+                                        searchSuggestionsView.setOnItemClickListener(new AdapterView.OnItemClickListener()
                                         {
-                                            searchDeckBrew(results.get(position));
-                                        }
-                                    });
-                                    searchSuggestionsView.showDropDown();
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                                            {
+                                                searchDeckBrew(response.body().results.get(position));
+                                            }
+                                        });
+                                        searchSuggestionsView.showDropDown();
+                                        searchCards.requestFocus();
+                                    } else {
+                                        suggestionsAdapter.clear();
+                                        suggestionsAdapter.notifyDataSetChanged();
+                                        searchSuggestionsView.setAdapter(null);
+                                        searchSuggestionsView.dismissDropDown();
+                                    }
                                 }
-                            }
 
-                            @Override public void onFailure(Throwable t) {}
-                        });
-
+                                @Override public void onFailure(Throwable t) {}
+                            });
+                } else {
+                    suggestionsAdapter.clear();
+                    suggestionsAdapter.notifyDataSetChanged();
+                    searchSuggestionsView.setAdapter(null);
+                    searchSuggestionsView.dismissDropDown();
+                }
                 return true;
             }
         });

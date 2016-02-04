@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/alex/Documents/git/mtg/app/build/intermediates/res/merged/debug/drawable-v23/abc_control_background_material.xml",
+        "source": "/Users/alex/Documents/git/mtg/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-v23/abc_control_background_material.xml"
+    },
+    {
         "merged": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/res/merged/debug/drawable-v23/abc_control_background_material.xml",
         "source": "/Users/acorll/Documents/git/saveya-android/MagicPrices/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-v23/abc_control_background_material.xml"
     },
